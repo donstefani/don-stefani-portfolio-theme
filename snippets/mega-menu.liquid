@@ -1,17 +1,37 @@
 {% comment %}
-  Default Mega Menu - Collections A-Z
-  Automatically generates navigation from all collections
+  Mega Menu Snippet - Collections A-Z
+  Parameters:
+  - products_per_collection: number of products to show (default: 4)
+  - background_color: background color (default: #ffffff)
+  - border_color: border color (default: #e5e7eb)
+  - link_color: link text color (default: #374151)
+  - link_hover_color: link hover text color (default: #1f2937)
+  - link_hover_background: link hover background (default: #f9fafb)
+  - accent_color: accent color (default: #3b82f6)
 {% endcomment %}
+
+{% assign products_per_collection = products_per_collection | default: 3 %}
+{% assign background_color = background_color | default: '#ffffff' %}
+{% assign border_color = border_color | default: '#e5e7eb' %}
+{% assign link_color = link_color | default: '#374151' %}
+{% assign link_hover_color = link_hover_color | default: '#1f2937' %}
+{% assign link_hover_background = link_hover_background | default: '#f9fafb' %}
+{% assign accent_color = accent_color | default: '#3b82f6' %}
+
+{% if products_per_collection > 3 %}
+  {% assign products_per_collection = 3 %}
+{% endif %}
 
 <div class="mega-menu">
   <nav class="mega-menu-nav">
     <div class="mega-menu-container">
       <ul class="mega-menu-list">
         {% for collection in collections %}
-          <li class="mega-menu-item">
-            <a href="{{ collection.url }}" class="mega-menu-link">
-              {{ collection.title }}
-            </a>
+          {% unless collection.handle == 'home' or collection.handle == 'frontpage' %}
+            <li class="mega-menu-item">
+              <a href="{{ collection.url }}" class="mega-menu-link">
+                {{ collection.title }}
+              </a>
             
             {% if collection.products.size > 0 %}
               <div class="mega-menu-dropdown">
@@ -21,7 +41,7 @@
                     <div class="mega-menu-products">
                       <h3 class="mega-menu-section-title">{{ collection.title }}</h3>
                       <div class="mega-menu-product-grid">
-                        {% for product in collection.products limit: 6 %}
+                        {% for product in collection.products limit: products_per_collection %}
                           <div class="mega-menu-product">
                             <a href="{{ product.url }}" class="mega-menu-product-link">
                               <div class="mega-menu-product-image">
@@ -50,36 +70,27 @@
                       </a>
                     </div>
                     
-                    <!-- Related Collections -->
-                    <div class="mega-menu-related">
-                      <h3 class="mega-menu-section-title">Related Collections</h3>
-                      <ul class="mega-menu-related-list">
-                        {% for related in collections %}
-                          {% if forloop.index <= 5 and related.handle != collection.handle %}
-                            <li>
-                              <a href="{{ related.url }}" class="mega-menu-related-link">
-                                {{ related.title }}
-                              </a>
-                            </li>
-                          {% endif %}
-                        {% endfor %}
-                      </ul>
+                    <!-- Collection description -->
+                    <div class="mega-menu-description">
+                      <h3 class="mega-menu-section-title">Description</h3>
+                      <p class="mega-menu-description-text">{{ collection.description | strip_html }}</p>
                     </div>
                   </div>
                 </div>
               </div>
             {% endif %}
           </li>
+          {% endunless %}
         {% endfor %}
       </ul>
     </div>
   </nav>
 </div>
 
-{% stylesheet %}
+<style>
   .mega-menu {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
+    background: {{ background_color }};
+    border-bottom: 1px solid {{ border_color }};
     position: relative;
     z-index: 100;
   }
@@ -110,7 +121,7 @@
   .mega-menu-link {
     display: block;
     padding: 1rem 1.5rem;
-    color: #374151;
+    color: {{ link_color }};
     text-decoration: none;
     font-weight: 500;
     font-size: 0.875rem;
@@ -121,9 +132,9 @@
   }
   
   .mega-menu-link:hover {
-    color: #1f2937;
-    background: #f9fafb;
-    border-bottom-color: #3b82f6;
+    color: {{ link_hover_color }};
+    background: {{ link_hover_background }};
+    border-bottom-color: {{ accent_color }};
   }
   
   .mega-menu-dropdown {
@@ -140,6 +151,7 @@
     transform: translateY(-10px);
     transition: all 0.3s ease;
     min-width: 600px;
+    max-width: 900px;
   }
   
   .mega-menu-item:hover .mega-menu-dropdown {
@@ -147,16 +159,35 @@
     visibility: visible;
     transform: translateY(0);
   }
+
+  /* Default: align left */
+.mega-menu-item .mega-menu-dropdown {
+  left: 0;
+  right: auto;
+  min-width: 600px;
+  max-width: 900px;
+}
+
+.mega-menu-item:last-child .mega-menu-dropdown {
+  left: auto;
+  right: 0;
+}
+
+.mega-menu-item:nth-last-child(1) .mega-menu-dropdown {
+  left: auto;
+  right: 0;
+}
   
   .mega-menu-content {
     padding: 2rem;
   }
   
   .mega-menu-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-  }
+  display: grid;
+  grid-template-columns: 1.5fr minmax(0, 1fr);
+  gap: 2rem;
+}
+
   
   .mega-menu-section-title {
     font-size: 1rem;
@@ -229,7 +260,7 @@
   
   .mega-menu-view-all {
     display: inline-block;
-    color: #3b82f6;
+    color: {{ accent_color }};
     text-decoration: none;
     font-weight: 500;
     font-size: 0.875rem;
@@ -241,29 +272,25 @@
     text-decoration: underline;
   }
   
-  .mega-menu-related-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+  .mega-menu-description {
+  min-width: 0;
+  overflow: hidden;
+}
   
-  .mega-menu-related-link {
-    display: block;
-    padding: 0.5rem 0;
-    color: #374151;
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color 0.2s ease;
-    border-bottom: 1px solid #f3f4f6;
-  }
-  
-  .mega-menu-related-link:hover {
-    color: #3b82f6;
-  }
-  
-  .mega-menu-related-link:last-child {
-    border-bottom: none;
-  }
+  .mega-menu-description-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+
+  max-width: 100%;
+}
+
   
   @media (max-width: 768px) {
     .mega-menu-list {
@@ -292,27 +319,4 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
-{% endstylesheet %}
-
-{% schema %}
-{
-  "name": "Mega Menu",
-  "tag": "section",
-  "class": "mega-menu-section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Mega Menu Configuration"
-    },
-    {
-      "type": "paragraph",
-      "content": "This mega menu automatically displays all collections in alphabetical order. The styling is fixed and optimized for the best user experience."
-    }
-  ],
-  "presets": [
-    {
-      "name": "Mega Menu"
-    }
-  ]
-}
-{% endschema %}
+</style>
