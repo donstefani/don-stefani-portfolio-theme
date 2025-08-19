@@ -1,0 +1,118 @@
+{% comment %}
+  Tailwind CSS Demo Section
+{% endcomment %}
+
+<div class="shopify-section">
+  <!-- Welcome section using Tailwind classes -->
+  <div class="bg-gray-50 py-16">
+    <div class="max-w-page mx-auto px-page-margin">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="flex-1">
+          <h1 class="font-primary text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Hello, Tailwind CSS!
+          </h1>
+
+          <p class="text-lg text-gray-600 mb-4 max-w-2xl">
+            This section demonstrates how Tailwind CSS integrates with your existing Shopify theme. 
+            The styling uses both Tailwind utility classes and your theme's CSS variables.
+          </p>
+
+          <p class="text-gray-600 mb-6 max-w-2xl">
+            Notice how we're using custom Tailwind classes like <code class="bg-gray-200 px-2 py-1 rounded">bg-background</code>, 
+            <code class="bg-gray-200 px-2 py-1 rounded">text-foreground</code>, and <code class="bg-gray-200 px-2 py-1 rounded">font-primary</code> 
+            that are mapped to your theme's CSS variables.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <button class="btn-primary">
+              Primary Button
+            </button>
+            <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Secondary Button
+            </button>
+          </div>
+        </div>
+        
+        <div class="flex-shrink-0">
+          <img src="{{ 'shoppy-x-ray.svg' | asset_url }}" width="300" height="300" alt="Shopify X-Ray" class="w-64 h-64 lg:w-80 lg:h-80">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features grid using Tailwind -->
+  <div class="max-w-page mx-auto px-page-margin py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="card">
+        <h3 class="text-xl font-bold text-foreground mb-4">Utility-First CSS</h3>
+        <p class="text-gray-600 mb-4">
+          Build custom designs without leaving your HTML. Tailwind's utility classes make it easy to create 
+          responsive layouts and beautiful components.
+        </p>
+        <a href="https://tailwindcss.com/docs" class="text-blue-600 hover:text-blue-800 font-medium">
+          Learn more →
+        </a>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold text-foreground mb-4">Theme Integration</h3>
+        <p class="text-gray-600 mb-4">
+          Seamlessly integrated with your existing CSS variables. Use classes like <code class="bg-gray-200 px-1 rounded">bg-background</code> 
+          and <code class="bg-gray-200 px-1 rounded">text-foreground</code> that map to your theme colors.
+        </p>
+        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+          View configuration →
+        </a>
+      </div>
+
+      <div class="card">
+        <h3 class="text-xl font-bold text-foreground mb-4">Custom Components</h3>
+        <p class="text-gray-600 mb-4">
+          Create reusable component classes using Tailwind's <code class="bg-gray-200 px-1 rounded">@apply</code> directive. 
+          Perfect for maintaining consistency across your theme.
+        </p>
+        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+          See examples →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color demonstration -->
+  <div class="bg-background text-foreground py-16">
+    <div class="max-w-page mx-auto px-page-margin">
+      <h2 class="font-primary text-3xl font-bold text-center mb-12">Theme Color Integration</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-background border-2 border-foreground p-8 rounded-lg">
+          <h3 class="text-foreground text-xl font-bold mb-4">Background & Foreground</h3>
+          <p class="text-foreground">
+            This card uses <code class="bg-gray-200 px-1 rounded">bg-background</code> and <code class="bg-gray-200 px-1 rounded">text-foreground</code> 
+            classes that automatically adapt to your theme's color scheme.
+          </p>
+        </div>
+        
+        <div class="bg-gray-100 border-2 border-gray-300 p-8 rounded-lg">
+          <h3 class="text-gray-800 text-xl font-bold mb-4">Standard Tailwind</h3>
+          <p class="text-gray-600">
+            This card uses standard Tailwind classes like <code class="bg-gray-200 px-1 rounded">bg-gray-100</code> 
+            and <code class="bg-gray-200 px-1 rounded">text-gray-800</code> for comparison.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tailwind CSS Demo",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Tailwind CSS Demo",
+      "category": "Demo"
+    }
+  ]
+}
+{% endschema %}

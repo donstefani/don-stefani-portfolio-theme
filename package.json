@@ -1,0 +1,14 @@
+{
+  "name": "dstefani-portfolio-theme",
+  "version": "1.0.0",
+  "description": "Shopify theme with Tailwind CSS",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/tailwind.css --watch",
+    "build:css:prod": "tailwindcss -i ./src/input.css -o ./assets/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  }
+}

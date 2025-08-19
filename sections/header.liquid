@@ -1,54 +1,362 @@
 <header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+  <div class="header__top">
+    <h2 class="header__title">
+      {{ shop.name | link_to: routes.root_url }}
+    </h2>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
-      {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+    <div class="header__icons">
+      {% if shop.customer_accounts_enabled %}
+        {{ 'icon-account.svg' | inline_asset_content | link_to: routes.account_url }}
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
-    </a>
+      <a href="{{ routes.cart_url }}">
+        {% if cart.item_count > 0 %}
+          <sup>{{ cart.item_count }}</sup>
+        {% endif %}
+
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
   </div>
+
+  {% if section.settings.enable_mega_menu %}
+    <!-- Mega Menu -->
+    <div class="mega-menu">
+      <nav class="mega-menu-nav">
+        <div class="mega-menu-container">
+          <ul class="mega-menu-list">
+            {% for collection in collections %}
+              <li class="mega-menu-item">
+                <a href="{{ collection.url }}" class="mega-menu-link">
+                  {{ collection.title }}
+                </a>
+                
+                {% if collection.products.size > 0 %}
+                  <div class="mega-menu-dropdown">
+                    <div class="mega-menu-content">
+                      <div class="mega-menu-grid">
+                        <!-- Featured Products -->
+                        <div class="mega-menu-products">
+                          <h3 class="mega-menu-section-title">{{ collection.title }}</h3>
+                          <div class="mega-menu-product-grid">
+                            {% for product in collection.products limit: 6 %}
+                              <div class="mega-menu-product">
+                                <a href="{{ product.url }}" class="mega-menu-product-link">
+                                  <div class="mega-menu-product-image">
+                                    {% if product.featured_image %}
+                                      <img 
+                                        src="{{ product.featured_image | image_url: width: 120, height: 120, crop: 'center' }}" 
+                                        alt="{{ product.title }}"
+                                        width="120"
+                                        height="120"
+                                        loading="lazy"
+                                      >
+                                    {% else %}
+                                      <div class="mega-menu-product-placeholder"></div>
+                                    {% endif %}
+                                  </div>
+                                  <div class="mega-menu-product-info">
+                                    <span class="mega-menu-product-title">{{ product.title }}</span>
+                                    <span class="mega-menu-product-price">{{ product.price | money }}</span>
+                                  </div>
+                                </a>
+                              </div>
+                            {% endfor %}
+                          </div>
+                          <a href="{{ collection.url }}" class="mega-menu-view-all">
+                            View all {{ collection.title }}
+                          </a>
+                        </div>
+                        
+                        <!-- Related Collections -->
+                        <div class="mega-menu-related">
+                          <h3 class="mega-menu-section-title">Related Collections</h3>
+                          <ul class="mega-menu-related-list">
+                            {% for related in collections %}
+                              {% if forloop.index <= 5 and related.handle != collection.handle %}
+                                <li>
+                                  <a href="{{ related.url }}" class="mega-menu-related-link">
+                                    {{ related.title }}
+                                  </a>
+                                </li>
+                              {% endif %}
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  {% else %}
+    <!-- Standard Menu -->
+    <div class="header__menu">
+      {% for link in section.settings.menu.links %}
+        {{ link.title | link_to: link.url }}
+      {% endfor %}
+    </div>
+  {% endif %}
 </header>
 
 {% stylesheet %}
   header {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .header__top {
     height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
+  
   header a {
     position: relative;
     text-decoration: none;
     color: var(--color-foreground);
   }
+  
   header a sup {
     position: absolute;
     left: 100%;
     overflow: hidden;
     max-width: var(--page-margin);
   }
+  
   header svg {
     width: 2rem;
   }
+  
   header .header__menu,
   header .header__icons {
     display: flex;
     gap: 1rem;
+  }
+  
+  /* Mega Menu Styles */
+  .mega-menu {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+    z-index: 100;
+  }
+  
+  .mega-menu-nav {
+    width: 100%;
+  }
+  
+  .mega-menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .mega-menu-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  
+  .mega-menu-item {
+    position: relative;
+  }
+  
+  .mega-menu-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .mega-menu-link:hover {
+    color: #1f2937;
+    background: #f9fafb;
+    border-bottom-color: #3b82f6;
+  }
+  
+  .mega-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-top: none;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-width: 600px;
+  }
+  
+  .mega-menu-item:hover .mega-menu-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .mega-menu-content {
+    padding: 2rem;
+  }
+  
+  .mega-menu-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+  
+  .mega-menu-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .mega-menu-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .mega-menu-product {
+    text-align: center;
+  }
+  
+  .mega-menu-product-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+  
+  .mega-menu-product-link:hover {
+    transform: translateY(-2px);
+  }
+  
+  .mega-menu-product-image {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mega-menu-product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .mega-menu-product-placeholder {
+    width: 100%;
+    height: 120px;
+    background: #f3f4f6;
+    border-radius: 0.375rem;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .mega-menu-product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .mega-menu-product-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+    line-height: 1.2;
+  }
+  
+  .mega-menu-product-price {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 400;
+  }
+  
+  .mega-menu-view-all {
+    display: inline-block;
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .mega-menu-view-all:hover {
+    text-decoration: underline;
+  }
+  
+  .mega-menu-related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mega-menu-related-link {
+    display: block;
+    padding: 0.5rem 0;
+    color: #374151;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .mega-menu-related-link:hover {
+    color: #3b82f6;
+  }
+  
+  .mega-menu-related-link:last-child {
+    border-bottom: none;
+  }
+  
+  @media (max-width: 768px) {
+    .mega-menu-list {
+      flex-direction: column;
+    }
+    
+    .mega-menu-link {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .mega-menu-dropdown {
+      position: static;
+      box-shadow: none;
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      min-width: auto;
+    }
+    
+    .mega-menu-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .mega-menu-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 {% endstylesheet %}
 
@@ -57,9 +365,21 @@
   "name": "t:general.header",
   "settings": [
     {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mega_menu",
+      "label": "Enable Mega Menu",
+      "default": true,
+      "info": "Automatically displays all collections with product previews"
+    },
+    {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "t:labels.menu",
+      "info": "Used when mega menu is disabled"
     }
   ]
 }
