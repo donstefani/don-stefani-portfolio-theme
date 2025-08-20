@@ -1,0 +1,175 @@
+<section id="quickbooks-integration" class="service-section py-16">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="service-content">
+      {% if section.settings.header_image != blank %}
+        <div class="mb-8">
+          <img src="{{ section.settings.header_image | asset_url }}" 
+               alt="{{ section.settings.title }}" 
+               class="w-full h-96 object-cover rounded-lg mb-8"
+               width="1140" height="384">
+        </div>
+      {% endif %}
+      
+      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'QuickBooks Online Integration' }}</h2>
+      
+      {% if section.settings.subtitle != blank %}
+        <p class="text-lg font-semibold text-gray-800 mb-4">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-8">{{ section.settings.description }}</p>
+      {% endif %}
+
+      <div class="space-y-8">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'feature' %}
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ block.settings.feature_title }}</h3>
+                {% if block.settings.feature_description != blank %}
+                  <p class="text-gray-600 mb-3">{{ block.settings.feature_description }}</p>
+                {% endif %}
+                {% if block.settings.feature_list != blank %}
+                  <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                    {% assign list_items = block.settings.feature_list | split: ',' %}
+                    {% for item in list_items %}
+                      <li>{{ item | strip }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .service-section {
+    scroll-margin-top: 100px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "QuickBooks Service",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header_image",
+      "label": "Header Image Asset",
+      "default": "quickbooks-online-accounting_1.jpg",
+      "info": "Enter the filename from your assets folder"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Service Title",
+      "default": "QuickBooks Online Integration"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Service Subtitle",
+      "default": "Automate your finances and gain real-time clarity."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service Description",
+      "default": "When your store starts to grow, bookkeeping can quickly get out of hand. That's where we come in.\n\nWe build custom integrations between your e-commerce systems and QuickBooks Online, tailored to how your business actually runs. Whether it's syncing orders, tracking inventory costs, or making sure every payment and refund is accounted for, we help you stay financially organized without the spreadsheets and late-night catch-up.\n\nIt's about giving you clean, connected financial data—so you can make smart decisions and get back to focusing on the business."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_description",
+          "label": "Feature Description",
+          "info": "Optional description before the feature list"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_list",
+          "label": "Feature List",
+          "info": "Enter features separated by commas",
+          "default": "Feature 1, Feature 2, Feature 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "QuickBooks Service",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Sales Data That Syncs Itself",
+            "feature_description": "No more manual entry. Your sales flow straight into QuickBooks—accurately and automatically.",
+            "feature_list": "Pull in orders from Shopify and other sales channels, Generate invoices instantly, Include returns, discounts, and fees without missing a beat"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Inventory Connected to Your Books",
+            "feature_description": "Track what you have, what it's worth, and where it's going—all in one place.",
+            "feature_list": "Real-time sync between inventory and accounting, Monitor stock levels, SKUs, and unit costs, Get clear financials tied directly to your inventory"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Customer Records That Stay in Sync",
+            "feature_description": "Keep your customer info consistent across platforms.",
+            "feature_list": "Match CRM and order data with QuickBooks, Enable personalized service and outreach"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Payments That Reconcile Themselves",
+            "feature_description": "Every transaction recorded, every cent accounted for.",
+            "feature_list": "Connect PayPal, Stripe, Square, and more, Capture payment method, customer, and amounts automatically, Keep cash flow visibility up to date"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Sales Tax, Sorted",
+            "feature_description": "Stay compliant without the headache.",
+            "feature_list": "Auto-calculate tax across states and countries, Generate ready-to-file reports"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Workflows That Save Time",
+            "feature_description": "Automate the repetitive stuff so your team can focus on the big picture.",
+            "feature_list": "Invoicing, payment tracking, payroll entries—all automated, Set alerts and reminders for important tasks"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Expense Tracking That Just Works",
+            "feature_description": "No more chasing down receipts or reconciling by hand.",
+            "feature_list": "Import expenses from cards and apps, Use custom workflows for approvals and parsing"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

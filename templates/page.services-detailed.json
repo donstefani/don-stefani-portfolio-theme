@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "header": {
+      "type": "services-header",
+      "settings": {
+        "header_image": "ecommerce-services.jpg",
+        "heading": "Our Services",
+        "description": "Comprehensive solutions designed to streamline your business operations and drive growth"
+      }
+    },
+    "shopify": {
+      "type": "shopify-backend-service",
+      "settings": {
+        "header_image": "ecommerce-shopify.jpg",
+        "title": "Shopify Backend Solutions",
+        "subtitle": "Behind every great Shopify store is a backend that keeps it all running smoothly. That's where we focus.",
+        "description": "We help store owners take control of the systems behind the scenes—whether that means setting up and configuring apps, integrating platforms, or building custom tools that streamline operations. Every solution we offer is shaped around how your business actually works, not just how Shopify expects it to.\n\nIf it runs through your store, we help make it easier, smarter, and more reliable."
+      }
+    },
+    "quickbooks": {
+      "type": "quickbooks-integration-service",
+      "settings": {
+        "header_image": "quickbooks-online-accounting_1.jpg",
+        "title": "QuickBooks Online Integration",
+        "subtitle": "Automate your finances and gain real-time clarity.",
+        "description": "When your store starts to grow, bookkeeping can quickly get out of hand. That's where we come in.\n\nWe build custom integrations between your e-commerce systems and QuickBooks Online, tailored to how your business actually runs. Whether it's syncing orders, tracking inventory costs, or making sure every payment and refund is accounted for, we help you stay financially organized without the spreadsheets and late-night catch-up.\n\nIt's about giving you clean, connected financial data—so you can make smart decisions and get back to focusing on the business."
+      }
+    },
+    "data": {
+      "type": "data-analysis-service",
+      "settings": {
+        "header_image": "data-analysis.jpg",
+        "title": "Data Structure & Insights",
+        "description": "Before you can rely on reports, you need to trust your data. We help clean, connect, and organize your data behind the scenes—so it's structured in a way that actually makes sense for your business.",
+        "additional_description": "That might mean normalizing data across systems, defining relationships between products, orders, and customers, or using AI to surface patterns you can't see in a spreadsheet. Once your data has integrity, every part of your operation—from reporting to planning—starts working smarter."
+      }
+    },
+    "cta": {
+      "type": "services-cta",
+      "settings": {
+        "heading": "Ready to Get Started?",
+        "description": "Let's discuss how we can help streamline your business operations.",
+        "button_text": "Contact Us",
+        "button_link": "https://www.example.com/contact"
+      }
+    }
+  },
+  "order": [
+    "header",
+    "shopify",
+    "quickbooks",
+    "data",
+    "cta"
+  ]
+}

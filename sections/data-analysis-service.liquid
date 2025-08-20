@@ -1,0 +1,159 @@
+<section id="data-analysis" class="service-section py-16">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="service-content">
+      {% if section.settings.header_image != blank %}
+        <div class="mb-8">
+          <img src="{{ section.settings.header_image | asset_url }}" 
+               alt="{{ section.settings.title }}" 
+               class="w-full h-96 object-cover rounded-lg mb-8"
+               width="1140" height="384">
+        </div>
+      {% endif %}
+      
+      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'Data Structure & Insights' }}</h2>
+      
+      {% if section.settings.description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-4">{{ section.settings.description }}</p>
+      {% endif %}
+      
+      {% if section.settings.additional_description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-8">{{ section.settings.additional_description }}</p>
+      {% endif %}
+
+      <div class="space-y-8">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'feature' %}
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ block.settings.feature_title }}</h3>
+                {% if block.settings.feature_description != blank %}
+                  <p class="text-gray-600 mb-3">{{ block.settings.feature_description }}</p>
+                {% endif %}
+                {% if block.settings.feature_list != blank %}
+                  <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                    {% assign list_items = block.settings.feature_list | split: ',' %}
+                    {% for item in list_items %}
+                      <li>{{ item | strip }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .service-section {
+    scroll-margin-top: 100px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Data Analysis",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header_image",
+      "label": "Header Image Asset",
+      "default": "data-analysis.jpg",
+      "info": "Enter the filename from your assets folder"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Service Title",
+      "default": "Data Structure & Insights"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service Description",
+      "default": "Before you can rely on reports, you need to trust your data. We help clean, connect, and organize your data behind the scenes—so it's structured in a way that actually makes sense for your business."
+    },
+    {
+      "type": "textarea",
+      "id": "additional_description",
+      "label": "Additional Description",
+      "default": "That might mean normalizing data across systems, defining relationships between products, orders, and customers, or using AI to surface patterns you can't see in a spreadsheet. Once your data has integrity, every part of your operation—from reporting to planning—starts working smarter."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_description",
+          "label": "Feature Description",
+          "info": "Optional description before the feature list"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_list",
+          "label": "Feature List",
+          "info": "Enter features separated by commas",
+          "default": "Feature 1, Feature 2, Feature 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Data Analysis",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Sales Insights That Actually Add Up",
+            "feature_description": "Once your sales data is properly organized, you can finally see the patterns that matter.",
+            "feature_list": "Automatic reports by day, week, or month, Breakdown by product, customer, channel, or campaign, ROI tracking across all your marketing efforts"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Inventory Intelligence, Not Just Tracking",
+            "feature_description": "With connected systems and clean data, you can make smarter inventory decisions.",
+            "feature_list": "Real-time updates across platforms, Low stock alerts and automated reordering, Forecast demand with confidence, Insight into turnover, sell-through, and aging stock"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Fulfillment Visibility You Can Trust",
+            "feature_description": "Accurate fulfillment data means fewer surprises—for you and your customers.",
+            "feature_list": "Full order lifecycle tracking, On-time delivery metrics by carrier, Integration with label tools and shipping updates, Return and exchange tracking that closes the loop"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Customer Insights with Real Depth",
+            "feature_description": "When your customer data is clean and centralized, you can understand behavior—not just transactions.",
+            "feature_list": "Segment by behavior, not just purchase history, Identify conversion paths and drop-off points, Build retention strategies rooted in real data"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Dashboards That Reflect Reality",
+            "feature_description": "Dashboards are only as good as the data beneath them. We make sure yours are both reliable and insightful.",
+            "feature_list": "Real-time views of key performance areas, Alerts when something's off—like a sudden sales dip, Predictive analytics based on clean, well-structured data"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

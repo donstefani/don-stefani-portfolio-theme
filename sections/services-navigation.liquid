@@ -1,0 +1,128 @@
+<section class="services-navigation py-8 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    {% if section.settings.heading != blank %}
+      <h3 class="text-xl font-semibold text-gray-900 mb-6">{{ section.settings.heading }}</h3>
+    {% endif %}
+    
+    <div class="grid md:grid-cols-3 gap-6">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'service_link' %}
+            <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+              {% if block.settings.service_icon != blank %}
+                <div class="text-green-600 mb-3">
+                  <i class="{{ block.settings.service_icon }} text-2xl"></i>
+                </div>
+              {% endif %}
+              
+              {% if block.settings.service_title != blank %}
+                <h4 class="font-semibold text-gray-900 mb-2">{{ block.settings.service_title }}</h4>
+              {% endif %}
+              
+              {% if block.settings.service_description != blank %}
+                <p class="text-sm text-gray-600 mb-4">{{ block.settings.service_description }}</p>
+              {% endif %}
+              
+              {% if block.settings.service_link != blank %}
+                <a href="{{ block.settings.service_link }}" 
+                   class="text-green-600 hover:text-green-700 font-medium text-sm transition-colors duration-300">
+                  {{ block.settings.link_text | default: 'Learn More' }}
+                  <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Services Navigation",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Navigation Heading",
+      "default": "Our Services"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service_link",
+      "name": "Service Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "service_icon",
+          "label": "Service Icon",
+          "default": "fas fa-shopping-cart",
+          "info": "Font Awesome icon class (e.g., fas fa-shopping-cart)"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Service Title"
+        },
+        {
+          "type": "textarea",
+          "id": "service_description",
+          "label": "Service Description",
+          "default": "Brief description of the service"
+        },
+        {
+          "type": "url",
+          "id": "service_link",
+          "label": "Service Link",
+          "info": "Link to the service section (e.g., #shopify-backend)"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Learn More"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Navigation",
+      "blocks": [
+        {
+          "type": "service_link",
+          "settings": {
+            "service_icon": "fas fa-shopping-cart",
+            "service_title": "Shopify Backend Solutions",
+            "service_description": "Behind every great Shopify store is a backend that keeps it all running smoothly.",
+            "service_link": "#shopify-backend",
+            "link_text": "Learn More"
+          }
+        },
+        {
+          "type": "service_link",
+          "settings": {
+            "service_icon": "fas fa-calculator",
+            "service_title": "QuickBooks Integration",
+            "service_description": "Automate your finances and gain real-time clarity with custom integrations.",
+            "service_link": "#quickbooks-integration",
+            "link_text": "Learn More"
+          }
+        },
+        {
+          "type": "service_link",
+          "settings": {
+            "service_icon": "fas fa-chart-bar",
+            "service_title": "Data Analysis & Reporting",
+            "service_description": "Clean, connect, and organize your data for insights you can actually trust.",
+            "service_link": "#data-analysis",
+            "link_text": "Learn More"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
