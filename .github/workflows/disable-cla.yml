@@ -1,4 +1,5 @@
 name: Disable CLA Check
+# This workflow attempts to override automatic CLA checks from GitHub Apps
 on:
   pull_request:
     types: [opened, synchronize, reopened]
