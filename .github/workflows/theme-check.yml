@@ -1,4 +1,5 @@
 name: Theme Check
+# Updated to use direct Shopify CLI instead of action to avoid CLA token issues
 on: 
   push:
   pull_request:
