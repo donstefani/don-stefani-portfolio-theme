@@ -1,0 +1,11 @@
+name: Disable CLA Check
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  disable-cla:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip CLA Check
+        run: echo "CLA check disabled for this repository"
