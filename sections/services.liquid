@@ -1,0 +1,194 @@
+<section id="services" class="py-24 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="text-center mb-16">
+      {% if section.settings.heading != blank %}
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ section.settings.heading }}</h2>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'service' %}
+              <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
+                {% if block.settings.image_asset != blank %}
+                  <div class="text-green-600 mb-4">
+                    <img src="{{ block.settings.image_asset | asset_url }}" 
+                         alt="{{ block.settings.title }}" 
+                         class="w-full h-32 object-cover rounded-lg mb-4"
+                         width="400" height="128">
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.title != blank %}
+                  <h3 class="text-xl font-bold text-gray-900 mb-4">{{ block.settings.title }}</h3>
+                {% endif %}
+                
+                {% if block.settings.description != blank %}
+                  <p class="text-gray-600 mb-6 flex-grow">{{ block.settings.description }}</p>
+                {% endif %}
+                
+                {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                  <a href="{{ block.settings.button_link }}" 
+                     class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">
+                    {{ block.settings.button_text }}
+                  </a>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      {% else %}
+        <!-- Fallback service cards if no blocks are configured -->
+        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
+          <div class="text-green-600 mb-4">
+            <img src="{{ 'ecommerce-shopify.jpg' | asset_url }}" 
+                 alt="Shopify Backend Solutions" 
+                 class="w-full h-32 object-cover rounded-lg mb-4"
+                 width="400" height="128">
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Shopify Backend Solutions</h3>
+          <p class="text-gray-600 mb-6 flex-grow">We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.</p>
+          <a href="/pages/services#shopify-backend" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
+          <div class="text-green-600 mb-4">
+            <img src="{{ 'quickbooks-online-accounting_1.jpg' | asset_url }}" 
+                 alt="QuickBooks Integration" 
+                 class="w-full h-32 object-cover rounded-lg mb-4"
+                 width="400" height="128">
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">QuickBooks Integration</h3>
+          <p class="text-gray-600 mb-6 flex-grow">When off-the-shelf apps don't quite work for how your business operates, we step in. We build custom integrations between your systems and QuickBooks Online—so your accounting stays accurate, up to date, and in sync with the rest of your operation.</p>
+          <a href="/pages/services#quickbooks-integration" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
+          <div class="text-green-600 mb-4">
+            <img src="{{ 'data-analysis.jpg' | asset_url }}" 
+                 alt="Data Structure & Insights" 
+                 class="w-full h-32 object-cover rounded-lg mb-4"
+                 width="400" height="128">
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Data Structure & Insights</h3>
+          <p class="text-gray-600 mb-6 flex-grow">Good reporting starts with good structure. We can help organize and connect your data behind the scenes—cleaning it up, normalizing relationships, and laying the groundwork for insights you can actually trust. Once your data has integrity, everything from reporting to planning gets a whole lot easier.</p>
+          <a href="/pages/services#data-analysis" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .service-card {
+    transition: all 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #4e8f30, #3a6b24);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #3a6b24, #2d521c);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(78, 143, 48, 0.3);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Services Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Our Services"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "Every store runs differently. We offer hands-on support for the backend systems that keep yours running smoothly—whether that means refining Shopify, syncing with QuickBooks, or improving your day-to-day operations."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Image Asset Filename",
+          "info": "Enter the filename from your assets folder (e.g., 'ecommerce-shopify.jpg')"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Service Title",
+          "default": "Service Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Service Description",
+          "default": "Service description goes here."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Section",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "title": "Shopify Backend Solutions",
+            "description": "We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.",
+            "button_text": "Learn More"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "QuickBooks Integration",
+            "description": "When off-the-shelf apps don't quite work for how your business operates, we step in. We build custom integrations between your systems and QuickBooks Online—so your accounting stays accurate, up to date, and in sync with the rest of your operation.",
+            "button_text": "Learn More"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "title": "Data Structure & Insights",
+            "description": "Good reporting starts with good structure. We can help organize and connect your data behind the scenes—cleaning it up, normalizing relationships, and laying the groundwork for insights you can actually trust. Once your data has integrity, everything from reporting to planning gets a whole lot easier.",
+            "button_text": "Learn More"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -14,6 +14,13 @@
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
+
+    {% # Load custom CSS %}
+    {% comment %}theme-check-disable:AssetUrlFilters{% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    {% comment %}theme-check-enable:AssetUrlFilters{% endcomment %}
+
+    {{ 'custom_2.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body>

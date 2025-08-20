@@ -1,0 +1,125 @@
+<section id="about" class="py-12 bg-white">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <!-- Left Column - Sales Pitch -->
+      <div>
+        {% if section.settings.heading != blank %}
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+        
+        {% if section.settings.paragraph_1 != blank %}
+          <p class="text-lg text-gray-600 mb-6">{{ section.settings.paragraph_1 }}</p>
+        {% endif %}
+        
+        {% if section.settings.paragraph_2 != blank %}
+          <p class="text-lg text-gray-600 mb-6">{{ section.settings.paragraph_2 }}</p>
+        {% endif %}
+        
+        {% if section.settings.paragraph_3 != blank %}
+          <p class="text-lg text-gray-600 mb-6">{{ section.settings.paragraph_3 }}</p>
+        {% endif %}
+      </div>
+      
+      <!-- Right Column - CTA -->
+      <div class="bg-gradient-to-br from-green-600 to-green-700 rounded-lg p-8 text-white" 
+           style="background: linear-gradient(135deg, #4e8f30 0%, #3a6b24 100%);">
+        {% if section.settings.cta_heading != blank %}
+          <h3 class="text-2xl font-bold mb-4">{{ section.settings.cta_heading }}</h3>
+        {% endif %}
+        
+        {% if section.settings.cta_description != blank %}
+          <p class="text-white mb-6">{{ section.settings.cta_description }}</p>
+        {% endif %}
+        
+        {% if section.settings.cta_button_text != blank and section.settings.cta_button_link != blank %}
+          <div class="space-y-4">
+            <a href="{{ section.settings.cta_button_link }}" 
+               class="block w-full bg-white text-green-600 text-center py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+               style="color: #4e8f30;">
+              {{ section.settings.cta_button_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .why-choose-section {
+    background: #ffffff;
+  }
+  
+  @media (max-width: 768px) {
+    .why-choose-section .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Why Choose Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Why Choose eveloTech?"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "First Paragraph",
+      "default": "You don't need to figure everything out on your own. We've spent decades helping e-commerce businesses solve the same backend challenges you're facing now—and we do it with care, clarity, and the experience to get it right."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Second Paragraph",
+      "default": "We're a small team that works closely with small businesses. When you reach out, you get real help from someone who understands what's at stake and knows how to move things forward."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_3",
+      "label": "Third Paragraph",
+      "default": "If you're ready for smoother operations and solid support, we're here when you need us."
+    },
+    {
+      "type": "header",
+      "content": "CTA Box Settings"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA Heading",
+      "default": "Ready to Get Started?"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_description",
+      "label": "CTA Description",
+      "default": "Ready to get your backend working for you? Let's build a solution that fits your business."
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Schedule a Consultation"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

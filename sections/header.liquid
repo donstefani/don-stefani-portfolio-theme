@@ -1,8 +1,14 @@
 <header>
   <div class="header__top">
-    <h2 class="header__title">
-      {{ shop.name | link_to: routes.root_url }}
-    </h2>
+    <div class="header__branding">
+      <h2 class="header__title font-orbitron">
+        {{ 'Don Stefani Web Development' | link_to: routes.root_url }}
+      </h2>
+      {% if section.settings.header_tagline != blank %}
+        <p class="header__tagline">{{ section.settings.header_tagline }}</p>
+      {% endif %}
+    </div>
+    
 
     <div class="header__icons">
       {% if shop.customer_accounts_enabled %}
@@ -56,6 +62,22 @@
     padding: 0 20px;
   }
   
+  .header__branding {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header__title {
+    margin: 0;
+  }
+  
+  .header__tagline {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
   header a {
     position: relative;
     text-decoration: none;
@@ -95,6 +117,12 @@
       "label": "t:labels.menu"
     },
     {
+    "type": "text",
+    "id": "header_tagline",
+    "label": "Header Tagline",
+    "default": "A portfolio site for Don Stefani Web Development"
+    },
+    {
       "type": "header",
       "content": "Mega Menu"
     },
@@ -108,12 +136,12 @@
     {
       "type": "range",
       "id": "products_per_collection",
-      "min": 3,
-      "max": 9,
-      "step": 3,
+      "min": 1,
+      "max": 4,
+      "step": 1,
       "default": 3,
       "label": "Products per collection",
-      "info": "Number of products to show in each collection dropdown"
+      "info": "Number of products to show in each collection dropdown (max 4)"
     },
     {
       "type": "header",
