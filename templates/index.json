@@ -55,7 +55,12 @@
             "button_link": "/pages/services#shopify-backend"
           }
         }
-      }
+      },
+      "block_order": [
+        "service-1",
+        "service-2",
+        "service-3"
+      ]
     },
     "why-choose": {
       "type": "why-choose",
