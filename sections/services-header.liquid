@@ -1,0 +1,57 @@
+<section class="services-header py-16" style="padding-top: 100px;">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <!-- Header Image -->
+    {% if section.settings.header_image != blank %}
+      <div class="mb-8">
+        <img src="{{ section.settings.header_image | asset_url }}" 
+             alt="Ecommerce Services" 
+             class="w-full h-96 object-cover rounded-lg mb-8"
+             width="1140" height="384">
+      </div>
+    {% endif %}
+    
+    <!-- Header Content -->
+    <div class="mb-8 max-w-4xl" style="margin-left: 20px;">
+      {% if section.settings.heading != blank %}
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ section.settings.heading }}</h1>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="text-xl text-gray-600">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Services Page Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header_image",
+      "label": "Header Image Asset",
+      "default": "ecommerce-services.jpg",
+      "info": "Enter the filename from your assets folder"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading",
+      "default": "Our Services"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Page Description",
+      "default": "Comprehensive solutions designed to streamline your business operations and drive growth"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services Page Header",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}

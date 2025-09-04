@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero-cta",
       "settings": {
-        "heading": "eveloTech is Your E-commerce Support Partner",
+        "heading": "Don Stefani is Your E-commerce Support Partner",
         "description": "We work alongside growing online stores to untangle backend complexity and keep operations running smoothly—offering dependable guidance, tailored solutions, and ongoing support as you scale.",
         "button_text": "Let's Get Started",
         "button_link": "/pages/contact"
@@ -29,10 +29,10 @@
           "type": "service",
           "settings": {
             "image_asset": "ecommerce-shopify.jpg",
-            "title": "Shopify Backend Solutions",
-            "description": "We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.",
+            "title": "Shopify Frontend Solutions",
+            "description": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers.",
             "button_text": "Learn More",
-            "button_link": "/pages/services#shopify-backend"
+            "button_link": "/pages/services#shopify-frontend"
           }
         },
         "service-2": {
@@ -48,11 +48,11 @@
         "service-3": {
           "type": "service",
           "settings": {
-            "image_asset": "data-analysis.jpg",
-            "title": "Data Structure & Insights",
-            "description": "Good reporting starts with good structure. We can help organize and connect your data behind the scenes—cleaning it up, normalizing relationships, and laying the groundwork for insights you can actually trust. Once your data has integrity, everything from reporting to planning gets a whole lot easier.",
+            "image_asset": "ecommerce-shopify.jpg",
+            "title": "Shopify Backend Solutions",
+            "description": "We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.",
             "button_text": "Learn More",
-            "button_link": "/pages/services#data-analysis"
+            "button_link": "/pages/services#shopify-backend"
           }
         }
       }
@@ -60,9 +60,9 @@
     "why-choose": {
       "type": "why-choose",
       "settings": {
-        "heading": "Why Choose eveloTech?",
-        "paragraph_1": "You don't need to figure everything out on your own. We've spent decades helping e-commerce businesses solve the same backend challenges you're facing now—and we do it with care, clarity, and the experience to get it right.",
-        "paragraph_2": "We're a small team that works closely with small businesses. When you reach out, you get real help from someone who understands what's at stake and knows how to move things forward.",
+        "heading": "Why Choose Don Stefani?",
+        "paragraph_1": "You don't need to figure everything out on your own. I've spent decades helping e-commerce businesses solve the same backend challenges you're facing now—and we do it with care, clarity, and the experience to get it right.",
+        "paragraph_2": "I'm a small team that works closely with small businesses. When you reach out, you get real help from someone who understands what's at stake and knows how to move things forward.",
         "paragraph_3": "If you're ready for smoother operations and solid support, we're here when you need us.",
         "cta_heading": "Ready to Get Started?",
         "cta_description": "Ready to get your backend working for you? Let's build a solution that fits your business.",

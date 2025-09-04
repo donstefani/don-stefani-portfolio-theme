@@ -1,0 +1,147 @@
+<section id="shopify-backend" class="service-section py-16">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="service-content">
+      {% if section.settings.header_image != blank %}
+        <div class="mb-8">
+          <img src="{{ section.settings.header_image | asset_url }}" 
+               alt="{{ section.settings.title }}" 
+               class="w-full h-96 object-cover rounded-lg mb-8"
+               width="1140" height="384">
+        </div>
+      {% endif %}
+      
+      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'Shopify Backend Solutions' }}</h2>
+      
+      {% if section.settings.subtitle != blank %}
+        <p class="text-lg font-semibold text-gray-800 mb-4">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-8">{{ section.settings.description }}</p>
+      {% endif %}
+
+      <div class="space-y-8">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'feature' %}
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ block.settings.feature_title }}</h3>
+                {% if block.settings.feature_description != blank %}
+                  <p class="text-gray-600 mb-3">{{ block.settings.feature_description }}</p>
+                {% endif %}
+                {% if block.settings.feature_list != blank %}
+                  <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                    {% assign list_items = block.settings.feature_list | split: ',' %}
+                    {% for item in list_items %}
+                      <li>{{ item | strip }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .service-section {
+    scroll-margin-top: 100px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shopify Service",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header_image",
+      "label": "Header Image Asset",
+      "default": "ecommerce-shopify.jpg",
+      "info": "Enter the filename from your assets folder"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Service Title",
+      "default": "Shopify Backend Solutions"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Service Subtitle",
+      "default": "Behind every great Shopify store is a backend that keeps it all running smoothly. That's where we focus."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service Description",
+      "default": "We help store owners take control of the systems behind the scenes—whether that means setting up and configuring apps, integrating platforms, or building custom tools that streamline operations. Every solution we offer is shaped around how your business actually works, not just how Shopify expects it to.\n\nIf it runs through your store, we help make it easier, smarter, and more reliable."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_description",
+          "label": "Feature Description",
+          "info": "Optional description before the feature list"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_list",
+          "label": "Feature List",
+          "info": "Enter features separated by commas",
+          "default": "Feature 1, Feature 2, Feature 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shopify Service",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Custom CRM Tools",
+            "feature_list": "Send bulk emails and texts for marketing or shipping updates, Automate review requests and track responses, Build communication workflows that feel personal, not robotic"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Product Management That Fits Your Flow",
+            "feature_list": "Create and organize products in a way that works for your team, Easily import and export large inventories, Make bulk updates to pricing, inventory, and more"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Smarter Order Management",
+            "feature_list": "Automatically pull in Shopify orders, Use custom dashboards to monitor and act on order data"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Shipping & Fulfillment, Dialed In",
+            "feature_list": "Generate FedEx and UPS labels inside your workflow, Provide real-time delivery tracking and customer notifications, Auto-update order status and fulfillment in Shopify"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

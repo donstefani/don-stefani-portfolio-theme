@@ -1,0 +1,159 @@
+<section id="shopify-frontend" class="service-section py-16">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="service-content">
+      {% if section.settings.header_image != blank %}
+        <div class="mb-8">
+          <img src="{{ section.settings.header_image | asset_url }}" 
+               alt="{{ section.settings.title }}" 
+               class="w-full h-96 object-cover rounded-lg mb-8"
+               width="1140" height="384">
+        </div>
+      {% endif %}
+      
+      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'Shopify Frontend Solutions' }}</h2>
+      
+      {% if section.settings.description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-4">{{ section.settings.description }}</p>
+      {% endif %}
+      
+      {% if section.settings.additional_description != blank %}
+        <p class="text-gray-600 leading-relaxed mb-8">{{ section.settings.additional_description }}</p>
+      {% endif %}
+
+      <div class="space-y-8">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'feature' %}
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ block.settings.feature_title }}</h3>
+                {% if block.settings.feature_description != blank %}
+                  <p class="text-gray-600 mb-3">{{ block.settings.feature_description }}</p>
+                {% endif %}
+                {% if block.settings.feature_list != blank %}
+                  <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                    {% assign list_items = block.settings.feature_list | split: ',' %}
+                    {% for item in list_items %}
+                      <li>{{ item | strip }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .service-section {
+    scroll-margin-top: 100px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shopify Frontend",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header_image",
+      "label": "Header Image Asset",
+      "default": "ecommerce-shopify.jpg",
+      "info": "Enter the filename from your assets folder"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Service Title",
+      "default": "Shopify Frontend Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Service Description",
+      "default": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers."
+    },
+    {
+      "type": "textarea",
+      "id": "additional_description",
+      "label": "Additional Description",
+      "default": "From custom theme development to performance optimization, we ensure your store not only looks great but performs flawlessly across all devices. Our frontend solutions are built with modern web standards, accessibility in mind, and conversion rate optimization at their core."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_title",
+          "label": "Feature Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_description",
+          "label": "Feature Description",
+          "info": "Optional description before the feature list"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_list",
+          "label": "Feature List",
+          "info": "Enter features separated by commas",
+          "default": "Feature 1, Feature 2, Feature 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shopify Frontend",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Custom Theme Development",
+            "feature_description": "Bespoke Shopify themes designed specifically for your brand and optimized for your target audience.",
+            "feature_list": "Mobile-first responsive design, Custom layouts and sections, Brand-specific styling and typography, Advanced product showcase features"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Performance Optimization",
+            "feature_description": "Lightning-fast loading times that keep customers engaged and improve your search rankings.",
+            "feature_list": "Image optimization and lazy loading, Code splitting and minification, Core Web Vitals optimization, CDN integration and caching strategies"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Conversion Rate Optimization",
+            "feature_description": "Data-driven design decisions that turn more visitors into paying customers.",
+            "feature_list": "A/B testing implementation, Checkout flow optimization, Product page enhancements, Trust signals and social proof integration"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "Third-Party Integrations",
+            "feature_description": "Seamlessly connect your store with the tools and services that power your business.",
+            "feature_list": "Payment gateway customizations, Marketing automation connections, Analytics and tracking setup, Inventory management integrations"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_title": "User Experience Enhancement",
+            "feature_description": "Intuitive navigation and user flows that make shopping effortless for your customers.",
+            "feature_list": "Advanced search and filtering, Personalized product recommendations, Streamlined checkout process, Accessibility compliance (WCAG 2.1)"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

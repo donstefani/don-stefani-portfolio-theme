@@ -1,0 +1,73 @@
+<section class="services-cta py-8">
+  <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
+    <div class="p-4 bg-white rounded-lg shadow-sm">
+      {% if section.settings.heading != blank %}
+        <h4 class="font-semibold text-gray-900 mb-3">{{ section.settings.heading }}</h4>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="text-sm text-gray-600 mb-4">{{ section.settings.description }}</p>
+      {% endif %}
+      
+      {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" 
+           class="block w-full bg-green-600 text-white text-center py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-300"
+           style="background-color: #4e8f30;">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .services-cta {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+  }
+  
+  @media (max-width: 768px) {
+    .services-cta {
+      position: static;
+      margin-top: 2rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Services CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "CTA Heading",
+      "default": "Ready to Get Started?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "CTA Description",
+      "default": "Let's discuss how we can help streamline your business operations."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Services CTA",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
