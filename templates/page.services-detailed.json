@@ -8,6 +8,15 @@
         "description": "Comprehensive solutions designed to streamline your business operations and drive growth"
       }
     },
+    "frontend": {
+      "type": "shopify-frontend-solutions",
+      "settings": {
+        "header_image": "ecommerce-shopify.jpg",
+        "title": "Shopify Frontend Solutions",
+        "description": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers.",
+        "additional_description": "From custom theme development to performance optimization, we ensure your store not only looks great but performs flawlessly across all devices. Our frontend solutions are built with modern web standards, accessibility in mind, and conversion rate optimization at their core."
+      }
+    },
     "shopify": {
       "type": "shopify-backend-service",
       "settings": {
@@ -17,7 +26,7 @@
         "description": "We help store owners take control of the systems behind the scenes—whether that means setting up and configuring apps, integrating platforms, or building custom tools that streamline operations. Every solution we offer is shaped around how your business actually works, not just how Shopify expects it to.\n\nIf it runs through your store, we help make it easier, smarter, and more reliable."
       }
     },
-    "quickbooks": {
+   "quickbooks": {
       "type": "quickbooks-integration-service",
       "settings": {
         "header_image": "quickbooks-online-accounting_1.jpg",
@@ -25,16 +34,7 @@
         "subtitle": "Automate your finances and gain real-time clarity.",
         "description": "When your store starts to grow, bookkeeping can quickly get out of hand. That's where we come in.\n\nWe build custom integrations between your e-commerce systems and QuickBooks Online, tailored to how your business actually runs. Whether it's syncing orders, tracking inventory costs, or making sure every payment and refund is accounted for, we help you stay financially organized without the spreadsheets and late-night catch-up.\n\nIt's about giving you clean, connected financial data—so you can make smart decisions and get back to focusing on the business."
       }
-    },
-    "data": {
-      "type": "data-analysis-service",
-      "settings": {
-        "header_image": "data-analysis.jpg",
-        "title": "Data Structure & Insights",
-        "description": "Before you can rely on reports, you need to trust your data. We help clean, connect, and organize your data behind the scenes—so it's structured in a way that actually makes sense for your business.",
-        "additional_description": "That might mean normalizing data across systems, defining relationships between products, orders, and customers, or using AI to surface patterns you can't see in a spreadsheet. Once your data has integrity, every part of your operation—from reporting to planning—starts working smarter."
-      }
-    },
+    }, 
     "cta": {
       "type": "services-cta",
       "settings": {
@@ -47,9 +47,9 @@
   },
   "order": [
     "header",
+    "frontend",
     "shopify",
     "quickbooks",
-    "data",
     "cta"
   ]
 }

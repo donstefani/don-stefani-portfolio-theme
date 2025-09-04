@@ -1,4 +1,4 @@
-<section id="data-analysis" class="service-section py-16">
+<section id="shopify-frontend" class="service-section py-16">
   <div class="max-w-7xl mx-auto px-4" style="max-width: 1140px;">
     <div class="service-content">
       {% if section.settings.header_image != blank %}
@@ -10,7 +10,7 @@
         </div>
       {% endif %}
       
-      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'Data Structure & Insights' }}</h2>
+      <h2 class="text-2xl font-bold mb-4" style="color: #4e8f30;">{{ section.settings.title | default: 'Shopify Frontend Solutions' }}</h2>
       
       {% if section.settings.description != blank %}
         <p class="text-gray-600 leading-relaxed mb-4">{{ section.settings.description }}</p>
@@ -53,32 +53,32 @@
 
 {% schema %}
 {
-  "name": "Data Analysis",
+  "name": "Shopify Frontend",
   "settings": [
     {
       "type": "text",
       "id": "header_image",
       "label": "Header Image Asset",
-      "default": "data-analysis.jpg",
+      "default": "ecommerce-shopify.jpg",
       "info": "Enter the filename from your assets folder"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Service Title",
-      "default": "Data Structure & Insights"
+      "default": "Shopify Frontend Solutions"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Service Description",
-      "default": "Before you can rely on reports, you need to trust your data. We help clean, connect, and organize your data behind the scenes—so it's structured in a way that actually makes sense for your business."
+      "default": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers."
     },
     {
       "type": "textarea",
       "id": "additional_description",
       "label": "Additional Description",
-      "default": "That might mean normalizing data across systems, defining relationships between products, orders, and customers, or using AI to surface patterns you can't see in a spreadsheet. Once your data has integrity, every part of your operation—from reporting to planning—starts working smarter."
+      "default": "From custom theme development to performance optimization, we ensure your store not only looks great but performs flawlessly across all devices. Our frontend solutions are built with modern web standards, accessibility in mind, and conversion rate optimization at their core."
     }
   ],
   "blocks": [
@@ -110,46 +110,46 @@
   ],
   "presets": [
     {
-      "name": "Data Analysis",
+      "name": "Shopify Frontend",
       "blocks": [
         {
           "type": "feature",
           "settings": {
-            "feature_title": "Sales Insights That Actually Add Up",
-            "feature_description": "Once your sales data is properly organized, you can finally see the patterns that matter.",
-            "feature_list": "Automatic reports by day, week, or month, Breakdown by product, customer, channel, or campaign, ROI tracking across all your marketing efforts"
+            "feature_title": "Custom Theme Development",
+            "feature_description": "Bespoke Shopify themes designed specifically for your brand and optimized for your target audience.",
+            "feature_list": "Mobile-first responsive design, Custom layouts and sections, Brand-specific styling and typography, Advanced product showcase features"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "feature_title": "Inventory Intelligence, Not Just Tracking",
-            "feature_description": "With connected systems and clean data, you can make smarter inventory decisions.",
-            "feature_list": "Real-time updates across platforms, Low stock alerts and automated reordering, Forecast demand with confidence, Insight into turnover, sell-through, and aging stock"
+            "feature_title": "Performance Optimization",
+            "feature_description": "Lightning-fast loading times that keep customers engaged and improve your search rankings.",
+            "feature_list": "Image optimization and lazy loading, Code splitting and minification, Core Web Vitals optimization, CDN integration and caching strategies"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "feature_title": "Fulfillment Visibility You Can Trust",
-            "feature_description": "Accurate fulfillment data means fewer surprises—for you and your customers.",
-            "feature_list": "Full order lifecycle tracking, On-time delivery metrics by carrier, Integration with label tools and shipping updates, Return and exchange tracking that closes the loop"
+            "feature_title": "Conversion Rate Optimization",
+            "feature_description": "Data-driven design decisions that turn more visitors into paying customers.",
+            "feature_list": "A/B testing implementation, Checkout flow optimization, Product page enhancements, Trust signals and social proof integration"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "feature_title": "Customer Insights with Real Depth",
-            "feature_description": "When your customer data is clean and centralized, you can understand behavior—not just transactions.",
-            "feature_list": "Segment by behavior, not just purchase history, Identify conversion paths and drop-off points, Build retention strategies rooted in real data"
+            "feature_title": "Third-Party Integrations",
+            "feature_description": "Seamlessly connect your store with the tools and services that power your business.",
+            "feature_list": "Payment gateway customizations, Marketing automation connections, Analytics and tracking setup, Inventory management integrations"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "feature_title": "Dashboards That Reflect Reality",
-            "feature_description": "Dashboards are only as good as the data beneath them. We make sure yours are both reliable and insightful.",
-            "feature_list": "Real-time views of key performance areas, Alerts when something's off—like a sudden sales dip, Predictive analytics based on clean, well-structured data"
+            "feature_title": "User Experience Enhancement",
+            "feature_description": "Intuitive navigation and user flows that make shopping effortless for your customers.",
+            "feature_list": "Advanced search and filtering, Personalized product recommendations, Streamlined checkout process, Accessibility compliance (WCAG 2.1)"
           }
         }
       ]

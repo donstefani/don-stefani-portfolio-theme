@@ -43,41 +43,9 @@
           {% endcase %}
         {% endfor %}
       {% else %}
-        <!-- Fallback service cards if no blocks are configured -->
-        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
-          <div class="text-green-600 mb-4">
-            <img src="{{ 'ecommerce-shopify.jpg' | asset_url }}" 
-                 alt="Shopify Backend Solutions" 
-                 class="w-full h-32 object-cover rounded-lg mb-4"
-                 width="400" height="128">
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Shopify Backend Solutions</h3>
-          <p class="text-gray-600 mb-6 flex-grow">We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.</p>
-          <a href="/pages/services#shopify-backend" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
-          <div class="text-green-600 mb-4">
-            <img src="{{ 'quickbooks-online-accounting_1.jpg' | asset_url }}" 
-                 alt="QuickBooks Integration" 
-                 class="w-full h-32 object-cover rounded-lg mb-4"
-                 width="400" height="128">
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">QuickBooks Integration</h3>
-          <p class="text-gray-600 mb-6 flex-grow">When off-the-shelf apps don't quite work for how your business operates, we step in. We build custom integrations between your systems and QuickBooks Online—so your accounting stays accurate, up to date, and in sync with the rest of your operation.</p>
-          <a href="/pages/services#quickbooks-integration" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 service-card flex flex-col">
-          <div class="text-green-600 mb-4">
-            <img src="{{ 'data-analysis.jpg' | asset_url }}" 
-                 alt="Data Structure & Insights" 
-                 class="w-full h-32 object-cover rounded-lg mb-4"
-                 width="400" height="128">
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-4">Data Structure & Insights</h3>
-          <p class="text-gray-600 mb-6 flex-grow">Good reporting starts with good structure. We can help organize and connect your data behind the scenes—cleaning it up, normalizing relationships, and laying the groundwork for insights you can actually trust. Once your data has integrity, everything from reporting to planning gets a whole lot easier.</p>
-          <a href="/pages/services#data-analysis" class="inline-block text-white px-6 py-2 rounded-lg transition-colors duration-300 btn-primary self-center">Learn More</a>
+        <!-- No services configured message -->
+        <div class="col-span-full text-center py-12">
+          <p class="text-gray-500 text-lg">No services configured. Please add services in the theme customizer.</p>
         </div>
       {% endif %}
     </div>
@@ -166,25 +134,31 @@
         {
           "type": "service",
           "settings": {
+            "image_asset": "ecommerce-shopify.jpg",
+            "title": "Shopify Frontend Solutions",
+            "description": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers.",
+            "button_text": "Learn More",
+            "button_link": "/pages/services#shopify-frontend"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "image_asset": "ecommerce-shopify.jpg",
             "title": "Shopify Backend Solutions",
             "description": "We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.",
-            "button_text": "Learn More"
+            "button_text": "Learn More",
+            "button_link": "/pages/services#shopify-backend"
           }
         },
         {
           "type": "service",
           "settings": {
+            "image_asset": "quickbooks-online-accounting_1.jpg",
             "title": "QuickBooks Integration",
             "description": "When off-the-shelf apps don't quite work for how your business operates, we step in. We build custom integrations between your systems and QuickBooks Online—so your accounting stays accurate, up to date, and in sync with the rest of your operation.",
-            "button_text": "Learn More"
-          }
-        },
-        {
-          "type": "service",
-          "settings": {
-            "title": "Data Structure & Insights",
-            "description": "Good reporting starts with good structure. We can help organize and connect your data behind the scenes—cleaning it up, normalizing relationships, and laying the groundwork for insights you can actually trust. Once your data has integrity, everything from reporting to planning gets a whole lot easier.",
-            "button_text": "Learn More"
+            "button_text": "Learn More",
+            "button_link": "/pages/services#quickbooks-integration"
           }
         }
       ]
