@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "heading": "Get In Touch",
+        "description": "Ready to transform your Shopify store? Let's discuss how Don Stefani can help your business scale efficiently.",
+        "phone": "(208) 573-9560",
+        "email": "dstefani@donstefani.com",
+        "business_hours": "Monday - Friday: 9:00 AM - 5:00 PM MST",
+        "response_time": "We typically respond within 24 hours during business days.",
+        "calendly_url": "https://calendly.com/don-stefani/one-to-one-meeting/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=ffffff&primary_color=4e8f30",
+        "calendly_description": "Book a 30-minute consultation to discuss your ecommerce backend needs and explore how Don Stefani can help your business scale."
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

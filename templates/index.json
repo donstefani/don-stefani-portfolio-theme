@@ -22,37 +22,37 @@
       "type": "services",
       "settings": {
         "heading": "Our Services",
-        "description": "Every store runs differently. We offer hands-on support for the backend systems that keep yours running smoothly—whether that means refining Shopify, syncing with QuickBooks, or improving your day-to-day operations."
+        "description": "I help Shopify brands build fast, scalable, and conversion-focused stores. Whether you’re just launching, need advanced custom features, or want to squeeze more sales out of your existing site — I deliver solutions that grow with your business."
       },
       "blocks": {
         "service-1": {
           "type": "service",
           "settings": {
-            "image_asset": "ecommerce-shopify.jpg",
-            "title": "Shopify Frontend Solutions",
-            "description": "Transform your Shopify store with custom frontend solutions that drive conversions and create exceptional user experiences. We build fast, responsive, and conversion-optimized themes that turn visitors into customers.",
+            "image_asset": "business-owner-working-on-online-store.jpg",
+            "title": "Store Design & Setup",
+            "description": "I build Shopify stores that look professional, load fast, and make shopping easy. From branded, mobile-friendly layouts to smooth navigation and mega menus, everything is designed to guide customers to your products and drive sales.",
             "button_text": "Learn More",
-            "button_link": "/pages/services#shopify-frontend"
+            "button_link": "/pages/services#custom-design"
           }
         },
         "service-2": {
           "type": "service",
           "settings": {
-            "image_asset": "quickbooks-online-accounting_1.jpg",
-            "title": "QuickBooks Integration",
-            "description": "When off-the-shelf apps don't quite work for how your business operates, we step in. We build custom integrations between your systems and QuickBooks Online—so your accounting stays accurate, up to date, and in sync with the rest of your operation.",
+            "image_asset": "creating-a-store-discount.jpg",
+            "title": "Custom Apps & Integrations",
+            "description": "I create custom features, develop tailored Shopify apps, and connect your store with the tools you use every day. From advanced product options to automated discounts and shipping rules, I deliver solutions that streamline operations and drive sales.",
             "button_text": "Learn More",
-            "button_link": "/pages/services#quickbooks-integration"
+            "button_link": "/pages/services#custom-features"
           }
         },
         "service-3": {
           "type": "service",
           "settings": {
-            "image_asset": "ecommerce-shopify.jpg",
-            "title": "Shopify Backend Solutions",
-            "description": "We help store owners get control of the backend—whether that means setting up and configuring apps, integrating platforms, or building custom solutions that automate your workflows and extend what Shopify can do. Everything we do is tailored to how your business actually runs.",
+            "image_asset": "startup-desktop.jpg",
+            "title": "Optimization & Support",
+            "description": "I help keep your store growing with SEO, analytics, and performance audits that uncover conversion wins. With ongoing updates, fixes, and improvements, your Shopify site stays smooth, optimized, and ready to scale.",
             "button_text": "Learn More",
-            "button_link": "/pages/services#shopify-backend"
+            "button_link": "/pages/services#optimization-support"
           }
         }
       },
