@@ -5,46 +5,318 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
-
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
-
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
+<div class="product-page-container">
+  <!-- Left Column: Product Images -->
+  <div class="product-images-column">
+    <div class="main-image-container">
+      {% if product.featured_image %}
+        <img 
+          id="main-product-image" 
+          src="{{ product.featured_image | image_url: width: 800 }}" 
+          alt="{{ product.featured_image.alt | escape }}"
+          class="main-product-image"
+          width="800"
+          height="800"
         >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+      {% else %}
+        <div class="no-image-placeholder">
+          <span>No image available</span>
+        </div>
+      {% endif %}
+    </div>
+    
+    <!-- Thumbnail Navigation (only show if more than 1 image) -->
+    {% if product.images.size > 1 %}
+      <div class="thumbnail-navigation">
+        {% assign thumbnail_count = 0 %}
+        {% for image in product.images %}
+          {% if thumbnail_count < 4 %}
+            <button 
+              class="thumbnail-btn {% if forloop.first %}active{% endif %}"
+              data-image-src="{{ image | image_url: width: 800 }}"
+              data-image-alt="{{ image.alt | escape }}"
+            >
+              <img 
+                src="{{ image | image_url: width: 150 }}" 
+                alt="{{ image.alt | escape }}"
+                class="thumbnail-image"
+                width="150"
+                height="150"
+              >
+            </button>
+            {% assign thumbnail_count = thumbnail_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 
-    <input type="text" name="quantity" min="1" value="1">
+  <!-- Right Column: Product Details -->
+  <div class="product-details-column">
+    <div class="product-info">
+      <h1 class="product-title font-orbitron">{{ product.title }}</h1>
+      
+      <div class="product-price">
+        {% assign current_variant = product.selected_or_first_available_variant %}
+        <span class="price-amount">{{ current_variant.price | money }}</span>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <span class="compare-price">{{ current_variant.compare_at_price | money }}</span>
+          <span class="sale-badge">Sale</span>
+        {% endif %}
+      </div>
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
+      {% if product.description != blank %}
+        <div class="product-description">
+          <div class="description-content">
+            <div class="description-text" data-full-text="{{ product.description | strip_html | escape }}">
+              {{ product.description }}
+            </div>
+            <div class="description-read-more">
+              <button type="button" class="read-more-btn">Read more...</button>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Form -->
+    <div class="product-form">
+      {% form 'product', product, class: 'product-form-inner' %}
+        {% assign current_variant = product.selected_or_first_available_variant %}
+
+        <!-- Variant Selection -->
+        {% unless product.has_only_default_variant %}
+          <div class="variant-selection">
+            {% for option in product.options_with_values %}
+              <div class="option-group">
+                <label for="option-{{ forloop.index }}" class="option-label">{{ option.name }}</label>
+                <select 
+                  id="option-{{ forloop.index }}" 
+                  name="options[{{ option.name }}]"
+                  class="option-select"
+                >
+                  {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          </div>
+        {% endunless %}
+
+        <!-- Hidden variant ID input -->
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+        <!-- Quantity and Add to Cart -->
+        <div class="purchase-section">
+          <div class="quantity-selector">
+            <label for="quantity" class="quantity-label">Quantity</label>
+            <div class="quantity-input-group">
+              <button type="button" class="quantity-btn quantity-decrease">-</button>
+              <input 
+                type="number" 
+                id="quantity" 
+                name="quantity" 
+                min="1" 
+                value="1" 
+                class="quantity-input"
+              >
+              <button type="button" class="quantity-btn quantity-increase">+</button>
+            </div>
+          </div>
+
+          <div class="add-to-cart-section">
+            <button 
+              type="submit" 
+              class="add-to-cart-btn"
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {% if current_variant.available %}
+                Add to Cart
+              {% else %}
+                Sold Out
+              {% endif %}
+            </button>
+            {{ form | payment_button }}
+          </div>
+        </div>
+      {% endform %}
+    </div>
+  </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Thumbnail navigation functionality
+  const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+  const mainImage = document.getElementById('main-product-image');
+  
+  thumbnailBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active class from all thumbnails
+      thumbnailBtns.forEach(b => b.classList.remove('active'));
+      
+      // Add active class to clicked thumbnail
+      this.classList.add('active');
+      
+      // Update main image
+      if (mainImage) {
+        const newSrc = this.getAttribute('data-image-src');
+        const newAlt = this.getAttribute('data-image-alt');
+        mainImage.src = newSrc;
+        mainImage.alt = newAlt;
+      }
+    });
+  });
+  
+  // Quantity controls
+  const quantityInput = document.querySelector('.quantity-input');
+  const decreaseBtn = document.querySelector('.quantity-decrease');
+  const increaseBtn = document.querySelector('.quantity-increase');
+  
+  if (decreaseBtn && quantityInput) {
+    decreaseBtn.addEventListener('click', function() {
+      const currentValue = parseInt(quantityInput.value);
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+  }
+  
+  if (increaseBtn && quantityInput) {
+    increaseBtn.addEventListener('click', function() {
+      const currentValue = parseInt(quantityInput.value);
+      quantityInput.value = currentValue + 1;
+    });
+  }
+  
+  // Variant selection handling
+  const optionSelects = document.querySelectorAll('.option-select');
+  const variantIdInput = document.querySelector('input[name="id"]');
+  
+  function updateVariant() {
+    const selectedOptions = Array.from(optionSelects).map(select => select.value);
+    
+    // Find matching variant (simplified - you might need more complex logic)
+    const productData = {{ product | json }};
+    const matchingVariant = productData.variants.find(variant => {
+      return variant.options.every((option, index) => option === selectedOptions[index]);
+    });
+    
+    if (matchingVariant && variantIdInput) {
+      variantIdInput.value = matchingVariant.id;
+      
+      // Update price
+      const priceElement = document.querySelector('.price-amount');
+      if (priceElement) {
+        priceElement.textContent = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(matchingVariant.price / 100);
+      }
+      
+      // Update compare price
+      const comparePriceElement = document.querySelector('.compare-price');
+      const saleBadge = document.querySelector('.sale-badge');
+      if (matchingVariant.compare_at_price && matchingVariant.compare_at_price > matchingVariant.price) {
+        if (comparePriceElement) {
+          comparePriceElement.textContent = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+          }).format(matchingVariant.compare_at_price / 100);
+          comparePriceElement.style.display = 'inline';
+        }
+        if (saleBadge) {
+          saleBadge.style.display = 'inline';
+        }
+      } else {
+        if (comparePriceElement) {
+          comparePriceElement.style.display = 'none';
+        }
+        if (saleBadge) {
+          saleBadge.style.display = 'none';
+        }
+      }
+      
+      // Update add to cart button
+      const addToCartBtn = document.querySelector('.add-to-cart-btn');
+      if (addToCartBtn) {
+        if (matchingVariant.available) {
+          addToCartBtn.textContent = 'Add to Cart';
+          addToCartBtn.disabled = false;
+        } else {
+          addToCartBtn.textContent = 'Sold Out';
+          addToCartBtn.disabled = true;
+        }
+      }
+    }
+  }
+  
+  optionSelects.forEach(select => {
+    select.addEventListener('change', updateVariant);
+  });
+  
+  // Read more/less functionality for product description
+  const descriptionText = document.querySelector('.description-text');
+  const readMoreBtn = document.querySelector('.read-more-btn');
+  
+  if (descriptionText && readMoreBtn) {
+    const fullHTML = descriptionText.innerHTML;
+    const fullText = descriptionText.getAttribute('data-full-text') || descriptionText.textContent.trim();
+    const maxLength = {{ section.settings.description_character_limit | default: 400 }};
+    
+    console.log('Full text length:', fullText.length);
+    console.log('Full text:', fullText);
+    
+    // Only truncate if text is longer than maxLength
+    if (fullText.length > maxLength) {
+      // Store the full HTML content
+      descriptionText.setAttribute('data-full-html', fullHTML);
+      
+      // Create truncated version
+      const truncatedText = fullText.substring(0, maxLength) + '...';
+      descriptionText.innerHTML = truncatedText;
+      descriptionText.classList.add('truncated');
+      
+      console.log('Truncated text:', truncatedText);
+      
+      readMoreBtn.addEventListener('click', function() {
+        if (descriptionText.classList.contains('truncated')) {
+          // Show full text
+          descriptionText.innerHTML = fullHTML;
+          descriptionText.classList.remove('truncated');
+          readMoreBtn.textContent = 'Read less...';
+        } else {
+          // Show truncated text
+          descriptionText.innerHTML = truncatedText;
+          descriptionText.classList.add('truncated');
+          readMoreBtn.textContent = 'Read more...';
+        }
+      });
+    } else {
+      // Hide read more button if text is short enough
+      readMoreBtn.classList.add('hidden');
+      console.log('Text is short enough, hiding read more button');
+    }
+  }
+});
+</script>
 
 {% schema %}
 {
   "name": "t:general.product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "range",
+      "id": "description_character_limit",
+      "label": "Description character limit",
+      "min": 400,
+      "max": 600,
+      "step": 50,
+      "default": 400,
+      "info": "Number of characters to show before 'Read more' appears"
+    }
+  ],
   "disabled_on": {
     "groups": ["header", "footer"]
   }

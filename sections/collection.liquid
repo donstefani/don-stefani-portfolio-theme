@@ -5,39 +5,93 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
-<h1>{{ collection.title }}</h1>
+<div class="collection-header">
+  <h1>{{ collection.title }}</h1>
+</div>
 
 <div class="collection-products">
   {% paginate collection.products by 20 %}
     {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
+      <div class="ss__result ss__result--item collection-products-box">
+        <!-- Product Image Link -->
+        <a name="img-link-{{ product.id }}" class="img-link" href="{{ product.url }}">
+          <div class="img-card" name="img-card-{{ product.id }}">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 480 }}" 
+                   alt="{{ product.title | escape }}" 
+                   title="{{ product.title | escape }}" 
+                   height="480" 
+                   width="480" 
+                   loading="lazy" 
+                   class="img-1">
+            {% endif %}
+            {% if product.images.size > 1 %}
+              <img src="{{ product.images[1] | image_url: width: 480 }}" 
+                   alt="{{ product.title | escape }}" 
+                   title="{{ product.title | escape }}" 
+                   height="480" 
+                   width="480" 
+                   loading="lazy" 
+                   class="img-2">
+            {% else %}
+              <img src="{{ product.featured_image | image_url: width: 480 }}" 
+                   alt="{{ product.title | escape }}" 
+                   title="{{ product.title | escape }}" 
+                   height="480" 
+                   width="480" 
+                   loading="lazy" 
+                   class="img-2">
+            {% endif %}
+          </div>
+        </a>
+
+        <!-- Wishlist Button -->
+        <div class="icon-wish" name="wish-button-{{ product.id }}">
+          <a class="wish-button swym-button product_{{ product.id }} swym-icon swym-heart swym-loaded" 
+             href="#" 
+             data-swaction="addToWishlist" 
+             data-product-id="{{ product.id }}" 
+             data-variant-id="{{ product.selected_or_first_available_variant.id }}" 
+             data-product-url="{{ product.url }}" 
+             data-product-handle="{{ product.handle }}" 
+             aria-label="Add to Wishlist">
+            <div class="btn__effect">
+              <svg class="heart-stroke icon-svg" fill="#6b7280" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path>
+              </svg>
+              <svg class="heart-full icon-svg" fill="#ec407a" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path>
+              </svg>
+              <div class="effect-group">
+                <span class="effect"></span>
+                <span class="effect"></span>
+                <span class="effect"></span>
+                <span class="effect"></span>
+                <span class="effect"></span>
+              </div>
+            </div>
+            <span class="swym-tooltip swym-inject swym-tooltip-clickable">
+              <span class="swym-tooltip-text">Add to wishlist</span>
+            </span>
+          </a>
         </div>
+
+        <!-- Product Info -->
+        <div class="img-label">
+          <div>
+            <a class="name" href="{{ product.url }}">{{ product.title | escape }}</a>
+          </div>
+          <span class="ss__price">{{ product.price | money }}</span>
+        </div>
+
+        <!-- Learn More Button -->
+        <a class="learn-more" href="{{ product.url }}">Learn More</a>
       </div>
     {% endfor %}
 
     {{ paginate | default_pagination }}
   {% endpaginate %}
 </div>
-
-{% stylesheet %}
-  .collection-products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
